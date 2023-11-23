@@ -1,0 +1,1248 @@
+{
+	"info": {
+		"_postman_id": "9195a50a-e881-46f9-a4d1-ac8e5bb61778",
+		"name": "Document Generation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30900779",
+		"_collection_link": "https://lunar-shuttle-856722.postman.co/workspace/Arcadia_CT_Workspace~7bb8a957-5e66-4a86-bea6-6b2f8b074bbd/collection/30900779-9195a50a-e881-46f9-a4d1-ac8e5bb61778?action=share&source=collection_link&creator=30900779"
+	},
+	"item": [
+		{
+			"name": "API_Requests",
+			"item": [
+				{
+					"name": "Valid payload",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 202\", function () {\r",
+									"    pm.response.to.have.status(202);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"requestId\");\r",
+									"});\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"templateLocation\": \"s3://your-bucket/templates/template.docx\",\r\n    \"payloadLocation\": \"s3://your-bucket/data/input-data.json\",\r\n    \"customerId\": \"amita\",\r\n    \"productId\": \"core-web\",\r\n    \"outputLocation\": {\r\n     \"bucket\": \"bidcoui.data.blah.blah\",\r\n     \"keyPath\": \"s3-path-here\",\r\n     \"filename\": \"bulk-print-9876543210987654321\",\r\n     \"outputType\": \"pdf\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/pdf-jobs",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"pdf-jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Missing template location key",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"requestId\");\r",
+									"});\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"payloadLocation\": \"s3://your-bucket/data/input-data.json\",\r\n    \"customerId\": \"amita\",\r\n    \"productId\": \"core-web\",\r\n    \"outputLocation\": {\r\n     \"bucket\": \"bidcoui.data.blah.blah\",\r\n     \"keyPath\": \"s3-path-here\",\r\n     \"filename\": \"bulk-print-9876543210987654321\",\r\n     \"outputType\": \"pdf\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/pdf-jobs",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"pdf-jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Missing template location value",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"requestId\");\r",
+									"});\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"templateLocation\": \"\",\r\n    \"payloadLocation\": \"s3://your-bucket/data/input-data.json\",\r\n    \"customerId\": \"amita\",\r\n    \"productId\": \"core-web\",\r\n    \"outputLocation\": {\r\n     \"bucket\": \"bidcoui.data.blah.blah\",\r\n     \"keyPath\": \"s3-path-here\",\r\n     \"filename\": \"bulk-print-9876543210987654321\",\r\n     \"outputType\": \"pdf\"\r\n     \r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/pdf-jobs",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"pdf-jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Missing payload location key",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"requestId\");\r",
+									"});\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " \r\n {\r\n    \"templateLocation\": \"s3://your-bucket/templates/template.docx\",\r\n    \"customerId\": \"amita\",\r\n    \"productId\": \"core-web\",\r\n    \"outputLocation\": {\r\n     \"bucket\": \"bidcoui.data.blah.blah\",\r\n     \"keyPath\": \"s3-path-here\",\r\n     \"filename\": \"bulk-print-9876543210987654321\",\r\n     \"outputType\": \"pdf\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/pdf-jobs",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"pdf-jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Missing payload location value",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"requestId\");\r",
+									"});\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " \r\n {\r\n    \"templateLocation\": \"s3://your-bucket/templates/template.docx\",\r\n    \"payloadLocation\": \"\",\r\n    \"customerId\": \"amita\",\r\n    \"productId\": \"core-web\",\r\n    \"outputLocation\": {\r\n     \"bucket\": \"bidcoui.data.blah.blah\",\r\n     \"keyPath\": \"s3-path-here\",\r\n     \"filename\": \"bulk-print-9876543210987654321\",\r\n     \"outputType\": \"pdf\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/pdf-jobs",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"pdf-jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Missing CustomerID key",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"requestId\");\r",
+									"});\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " \r\n {\r\n    \"templateLocation\": \"s3://your-bucket/templates/template.docx\",\r\n    \"payloadLocation\": \"s3://your-bucket/data/input-data.json\",\r\n    \"productId\": \"core-web\",\r\n    \"outputLocation\": {\r\n     \"bucket\": \"bidcoui.data.blah.blah\",\r\n     \"keyPath\": \"s3-path-here\",\r\n     \"filename\": \"bulk-print-9876543210987654321\",\r\n     \"outputType\": \"pdf\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/pdf-jobs",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"pdf-jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Missing CustomerID value",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"requestId\");\r",
+									"});\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " \r\n {\r\n    \"templateLocation\": \"s3://your-bucket/templates/template.docx\",\r\n    \"payloadLocation\": \"s3://your-bucket/data/input-data.json\",\r\n    \"customerId\": \"\",\r\n    \"productId\": \"core-web\",\r\n    \"outputLocation\": {\r\n     \"bucket\": \"bidcoui.data.blah.blah\",\r\n     \"keyPath\": \"s3-path-here\",\r\n     \"filename\": \"bulk-print-9876543210987654321\",\r\n     \"outputType\": \"pdf\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/pdf-jobs",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"pdf-jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Missing ProductID key",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"requestId\");\r",
+									"});\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " \r\n {\r\n    \"templateLocation\": \"s3://your-bucket/templates/template.docx\",\r\n    \"payloadLocation\": \"s3://your-bucket/data/input-data.json\",\r\n    \"customerId\": \"amita\",\r\n    \"outputLocation\": {\r\n     \"bucket\": \"bidcoui.data.blah.blah\",\r\n     \"keyPath\": \"s3-path-here\",\r\n     \"filename\": \"bulk-print-9876543210987654321\",\r\n     \"outputType\": \"pdf\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/pdf-jobs",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"pdf-jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Missing ProductID value",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"requestId\");\r",
+									"});\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " \r\n {\r\n    \"templateLocation\": \"s3://your-bucket/templates/template.docx\",\r\n    \"payloadLocation\": \"s3://your-bucket/data/input-data.json\",\r\n    \"customerId\": \"amita\",\r\n    \"productId\": \"\",\r\n    \"outputLocation\": {\r\n     \"bucket\": \"bidcoui.data.blah.blah\",\r\n     \"keyPath\": \"s3-path-here\",\r\n     \"filename\": \"bulk-print-9876543210987654321\",\r\n     \"outputType\": \"pdf\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/pdf-jobs",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"pdf-jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Missing OutputLocation key",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"requestId\");\r",
+									"});\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"templateLocation\": \"s3://your-bucket/templates/template.docx\",\r\n    \"payloadLocation\": \"s3://your-bucket/data/input-data.json\",\r\n    \"customerId\": \"amita\",\r\n    \"productId\": \"core-web\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/pdf-jobs",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"pdf-jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Missing OutputLocation outputtypekey",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"requestId\");\r",
+									"});\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"templateLocation\": \"s3://your-bucket/templates/template.docx\",\r\n    \"payloadLocation\": \"s3://your-bucket/data/input-data.json\",\r\n    \"customerId\": \"amita\",\r\n    \"productId\": \"core-web\",\r\n    \"outputLocation\": {\r\n     \"bucket\": \"bidcoui.data.blah.blah\",\r\n     \"keyPath\": \"s3-path-here\",\r\n     \"filename\": \"bulk-print-9876543210987654321\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/pdf-jobs",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"pdf-jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Missing OutputLocation bucketkey",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"requestId\");\r",
+									"});\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"templateLocation\": \"s3://your-bucket/templates/template.docx\",\r\n    \"payloadLocation\": \"s3://your-bucket/data/input-data.json\",\r\n    \"customerId\": \"amita\",\r\n    \"productId\": \"core-web\",\r\n    \"outputLocation\": {\r\n     \"keyPath\": \"s3-path-here\",\r\n     \"filename\": \"bulk-print-9876543210987654321\",\r\n     \"outputType\": \"pdf\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/pdf-jobs",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"pdf-jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Missing OutputLocation pathkey",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"requestId\");\r",
+									"});\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"templateLocation\": \"s3://your-bucket/templates/template.docx\",\r\n    \"payloadLocation\": \"s3://your-bucket/data/input-data.json\",\r\n    \"customerId\": \"amita\",\r\n    \"productId\": \"core-web\",\r\n    \"outputLocation\": {\r\n     \"bucket\": \"bidcoui.data.blah.blah\",\r\n     \"filename\": \"bulk-print-9876543210987654321\",\r\n     \"outputType\": \"pdf\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/pdf-jobs",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"pdf-jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Missing OutputLocation filenamekey",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"requestId\");\r",
+									"});\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"templateLocation\": \"s3://your-bucket/templates/template.docx\",\r\n    \"payloadLocation\": \"s3://your-bucket/data/input-data.json\",\r\n    \"customerId\": \"amita\",\r\n    \"productId\": \"core-web\",\r\n    \"outputLocation\": {\r\n     \"bucket\": \"bidcoui.data.blah.blah\",\r\n     \"keyPath\": \"s3-path-here\",\r\n     \"outputType\": \"pdf\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/pdf-jobs",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"pdf-jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Missing OutputLocation value",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"requestId\");\r",
+									"});\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"templateLocation\": \"s3://your-bucket/templates/template.docx\",\r\n    \"payloadLocation\": \"s3://your-bucket/data/input-data.json\",\r\n    \"customerId\": \"amita\",\r\n    \"productId\": \"core-web\",\r\n    \"outputLocation\": {\r\n     \"bucket\": \"\",\r\n     \"keyPath\": \"\",\r\n     \"filename\": \"\",\r\n     \"outputType\": \"\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/pdf-jobs",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"pdf-jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Missing OutputLocation bucketvalue",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"requestId\");\r",
+									"});\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"templateLocation\": \"s3://your-bucket/templates/template.docx\",\r\n    \"payloadLocation\": \"s3://your-bucket/data/input-data.json\",\r\n    \"customerId\": \"amita\",\r\n    \"productId\": \"core-web\",\r\n    \"outputLocation\": {\r\n     \"bucket\": \"\",\r\n     \"keyPath\": \"\",\r\n     \"filename\": \"\",\r\n     \"outputType\": \"\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/pdf-jobs",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"pdf-jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Missing OutputLocation keypathvalue",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"requestId\");\r",
+									"});\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"templateLocation\": \"s3://your-bucket/templates/template.docx\",\r\n    \"payloadLocation\": \"s3://your-bucket/data/input-data.json\",\r\n    \"customerId\": \"amita\",\r\n    \"productId\": \"core-web\",\r\n    \"outputLocation\": {\r\n     \"bucket\": \"bidcoui.data.blah.blah\",\r\n     \"keyPath\": \"\",\r\n     \"filename\": \"bulk-print-9876543210987654321\",\r\n     \"outputType\": \"pdf\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/pdf-jobs",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"pdf-jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Missing OutputLocation filenamevalue",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"requestId\");\r",
+									"});\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"templateLocation\": \"s3://your-bucket/templates/template.docx\",\r\n    \"payloadLocation\": \"s3://your-bucket/data/input-data.json\",\r\n    \"customerId\": \"amita\",\r\n    \"productId\": \"core-web\",\r\n    \"outputLocation\": {\r\n     \"bucket\": \"bidcoui.data.blah.blah\",\r\n     \"keyPath\": \"s3-path-here\",\r\n     \"filename\": \"\",\r\n     \"outputType\": \"pdf\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/pdf-jobs",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"pdf-jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Missing OutputLocation outputypevalue",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"requestId\");\r",
+									"});\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"templateLocation\": \"s3://your-bucket/templates/template.docx\",\r\n    \"payloadLocation\": \"s3://your-bucket/data/input-data.json\",\r\n    \"customerId\": \"amita\",\r\n    \"productId\": \"core-web\",\r\n    \"outputLocation\": {\r\n     \"bucket\": \"bidcoui.data.blah.blah\",\r\n     \"keyPath\": \"s3-path-here\",\r\n     \"filename\": \"bulk-print-9876543210987654321\",\r\n     \"outputType\": \"\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/pdf-jobs",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"pdf-jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Empty_Payload",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"requestId\");\r",
+									"});\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/pdf-jobs",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"pdf-jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Additional_fields",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"requestId\");\r",
+									"});\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"templateLocation\": \"s3://your-bucket/templates/template.docx\",\r\n\"payloadLocation\": \"s3://your-bucket/data/input-data.json\",\r\n\"customerId\": \"amita\",\r\n\"productId\": \"core-web\",\r\n\"clientName\": \"Arcadia\",\r\n\"PatientName\":\"Jhone Doe\",\r\n\"outputLocation\": {\r\n\"bucket\": \"bidcoui.data.blah.blah\",\r\n\"keyPath\": \"s3-path-here\",\r\n\"filename\": \"bulk-print-9876543210987654321\",\r\n\"outputType\": \"pdf\"\r\n}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/pdf-jobs",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"pdf-jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Multiple Requests",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"requestId\");\r",
+									"});\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n\"templateLocation\": \"s3://your-bucket/templates/template.docx\",\r\n\"payloadLocation\": \"s3://your-bucket/data/input-data.json\",\r\n\"customerId\": \"amita\",\r\n\"productId\": \"core-web\",\r\n\"outputLocation\": {\r\n\"bucket\": \"bidcoui.data.blah.blah\",\r\n\"keyPath\": \"s3-path-here\",\r\n\"filename\": \"bulk-print-9876543210987654321\",\r\n\"outputType\": \"pdf\"\r\n}\r\n    },\r\n\r\n\r\n{\r\n\"templateLocation\": \"s3://your-bucket/templates/template2.docx\",\r\n\"payloadLocation\": \"s3://your-bucket/data/input-data.json\",\r\n\"customerId\": \"test\",\r\n\"productId\": \"core-web\",\r\n\"outputLocation\": {\r\n\"bucket\": \"bidcoui.data.blah.blah\",\r\n\"keyPath\": \"s3-path-here\",\r\n\"filename\": \"bulk-print-9876543210987654321\",\r\n\"outputType\": \"pdf\"\r\n}\r\n}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/pdf-jobs",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"pdf-jobs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
