@@ -25,10 +25,7 @@ jobs:
         run:  |
           npm install -g newman
           npm install -g newman-reporter-htmlextra
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '19.x'
-
+      
       # Runs the postman collection
       - name: Run Tests
         run:  newman run "Document_PC.json" -e "Local_Environment.postman_environment.json"-r cli,htmlextra --reporter-htmlextra-title "Auto" --reporter-htmlextra-export TestArtifact/htmlreport.html
