@@ -28,7 +28,7 @@ jobs:
       
       # Runs the postman collection
       - name: Run Tests
-        run:  newman run "Document_PC.json" -e "Local_Environment.postman_environment.json"-r cli,htmlextra --reporter-htmlextra-title "Auto" --reporter-htmlextra-export TestArtifact/htmlreport.html
+        run:  newman run "Document_PC.json" -e "Local_Environment.postman_environment.json"-r cli,htmlextra --reporter-htmlextra-title "Auto" --reporter-htmlextra-export TestArtifacts/htmlreport.html
 
 
      # Upload the report to TestArtifact directory
@@ -36,4 +36,4 @@ jobs:
       - uses: actions/upload-Artifact@v3
         with:
           name: Reports
-          path: TestArtifact
+          path: TestArtifacts
